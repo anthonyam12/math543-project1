@@ -1,0 +1,8 @@
+Loan Amount
+Grade
+Loan Status
+Emp Length
+Home Ownership
+Annual Income
+delinq_2yrs
+dti
