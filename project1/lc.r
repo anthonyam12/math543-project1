@@ -2,10 +2,10 @@ run <- function(filename) {
   lcData <- read.csv(filename)
   library(dplyr)
   
-  attach(lcData)
   baseData <- select(lcData, int_rate, loan_status, loan_amnt, grade)
   baseData <- arrange(baseData, loan_status)
   # split(baseData, start:end)
+  return(baseData)
 }
 
 percentColToDouble <- function(df, colName) {
@@ -24,3 +24,4 @@ numericLoanStatus <- function(df) {
   numbers <- 1:7
   print(numbers)
 }
+
