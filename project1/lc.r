@@ -2,26 +2,17 @@ run <- function(filename) {
   lcData <- read.csv(filename)
   library(dplyr)
   
-  baseData <- select(lcData, int_rate, loan_status, loan_amnt, grade)
+  baseData <- select(lcData, int_rate, loan_status, loan_amnt, grade, emp_length, 
+                     home_ownership, annual_inc, delinq_2yrs, dti)
   baseData <- arrange(baseData, loan_status)
   # split(baseData, start:end)
   return(baseData)
 }
 
-percentColToDouble <- function(df, colName) {
-  for(row in df[,colName]) {
-    df[row,colName] <- percentToDouble(df[row, colName])
-  }
-  return(df)
+getGoodStanding <- function(df) {
+  return(filter(df, !(loan_status %in% c("Charged Off", "Default"))))
 }
 
-percentToDouble <- function(pct) {
-  return(1.0)
+getDefault <- function(df) {
+  return(filter(df, loan_status %in% c("Charged Off", "Default")))
 }
-
-# 1-Charged Off, 2-Current, 3-Default, 4-Fully Paid, 5-In Grace Period, 6-Late(16-30 days), 7-Late(31-120 days)
-numericLoanStatus <- function(df) {
-  numbers <- 1:7
-  print(numbers)
-}
-
