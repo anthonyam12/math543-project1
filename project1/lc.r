@@ -75,5 +75,15 @@ homeOwnershipAnalysis <- function(df) {
   barplot(subparTab)
 }
 
+annualIncAnalysis <- function(df) {
+  library(lattice)
+  par <- getGoodStanding(df)
+  subpar <- getDefault(df)
+  
+  mean(df$annual_inc, na.rm=TRUE)
+  mean(df$annual_inc, na.rm=TRUE, trim=.2)
+  mean(df$annual_inc, na.rm=TRUE, trim=.1)
+}
+
 
 
