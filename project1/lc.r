@@ -21,3 +21,59 @@ intRateToNumeric <- function(df) {
   df$int_rate <- sapply(df$int_rate, function(x) as.numeric(substr(x, 1, nchar(as.character(x))-1)))
   return(df)
 }
+
+# not a very useful feature
+intRateAnalysis <- function(df) {
+  library(lattice)
+  
+  par <- getGoodStanding(df)
+  subpar <- getDefault(df)
+  
+  # somewhat useful
+  summary(par$int_rate)
+  summary(subpar$int_rate)
+  
+  # slightly more useful - probabl won't use all for the interest rate feature
+  bwplot(df$loan_status ~ df$int_rate)
+  hist(subpar$int_rate)
+  hist(par$int_rate)
+}
+
+# not a very useful feature
+loanAmntAnalysis <- function(df) {
+  library(lattice)
+  par <- getGoodStanding(df)
+  subpar <- getDefault(df)
+  
+  bwplot(df$loan_status ~ df$loan_amnt)
+  hist(subpar$loan_amnt)
+  hist(par$loan_amnt)
+} 
+
+empLengthAnalysis <- function(df) {
+  library(lattice)
+  par <- getGoodStanding(df)
+  subpar <- getDefault(df)
+  
+  plot(par$emp_length)
+  plot(subpar$emp_length)
+}
+
+homeOwnershipAnalysis <- function(df) {
+  library(lattice)
+  par <- getGoodStanding(df)
+  subpar <- getDefault(df)
+
+  # percent of good loans and home ownership status
+  parTab <- table(par$home_ownership)/nrow(par) * 100
+  print(parTab)
+  # percent of bad loans and home ownership status
+  subparTab <- table(subpar$home_ownership)/nrow(subpar) * 100
+  print(subparTab)
+  
+  barplot(parTab)
+  barplot(subparTab)
+}
+
+
+

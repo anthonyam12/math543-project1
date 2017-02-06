@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Overview
-We're looking at loan data!
+We're looking at loan data! 
 
 ## Data Description
 Talk about the fields we looked at here
