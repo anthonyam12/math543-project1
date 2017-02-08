@@ -1,9 +1,4 @@
 ---
-output:
-  pdf_document: default
-  html_document: default
----
----
 title: "Project 1: Loan Data"
 author: "Anthony Morast and Daniel Nix"
 date: "February 3, 2017"
