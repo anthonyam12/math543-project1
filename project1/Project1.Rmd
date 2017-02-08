@@ -127,6 +127,16 @@ Home ownership may be another metric to predict if a loan will be repaid. If ind
 
 Let's make a pairs plot and maybe something else cool looking.
 
+## Uses for this data
+Lending Club, along with venture capital companies have used this dataset to attempt prediction of good and bad loans. 
+The goal is to reduce the number of defaults providing good return on investment. 
+Loan default prediction is an active field of financial research and datasets like the one discussed here provide valuable information when modeling the problem.
+
+Some hypotheses which could be answered with data like this might be:
+
++ Does the income of a person help predict if they will repay a loan?
++ How does debt to income ratio effect the interest rate of a loan?
++ Does the interest rate of a loan depend on a person's income?
 
 ## Conclusion
-Loans are great! Get one today! It's like FREEEEE MONEYYYYY!!!!
+The summary of loan data provided by Lending Club provided data which could help determine whether or not loans will be repaid. Differences between loans paid in full and loans charged off were seen. However, no single factor was found to determined whether or not a loan would be repaid.
