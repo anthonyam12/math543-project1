@@ -72,9 +72,9 @@ Do a data summary looking at mean, sd, etc
   library(lattice)
   # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! pairs(lcData)
 
-  mosaicplot(lcData$loan_status ~ lcData$grade)
+  mosaicplot(lcData$loan_status ~ lcData$grade, xlab="Loan Status", ylab="Loan Grade", main="Loan Status vs Grade")
   #grade to interest rate 
-  plot(lcData$int_rate ~ lcData$grade)
+  plot(lcData$int_rate ~ lcData$grade, ylab="Interest Rate", xlab="Loan Grade", main="Interest vs Grade" )
   
   # comparing quantitative variables to loan_status
   # annual income
