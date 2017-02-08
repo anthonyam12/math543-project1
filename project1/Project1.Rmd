@@ -83,7 +83,7 @@ Do a data summary looking at mean, sd, etc
   bwplot(lcData$loan_status ~ lcData$annual_inc, main="Annual Income to Loan Status", xlab="Annual Income", ylab="Loan Status") 
   
   # int_rate
-  bwplot(lcData$loan_status ~ lcData$int_rate)
+  bwplot(lcData$loan_status ~ lcData$int_rate, xlab="Interest Rate (%)", ylab="Loan Status", main="Interest Rate vs Loan Status")
 ```
 Let's make a pairs plot and maybe something else cool looking.
 
