@@ -83,6 +83,12 @@ annualIncAnalysis <- function(df) {
   mean(df$annual_inc, na.rm=TRUE)
   mean(df$annual_inc, na.rm=TRUE, trim=.2)
   mean(df$annual_inc, na.rm=TRUE, trim=.1)
+  
+  avgIncPar <- mean(par$annual_inc, na.rm=TRUE, trim=.2)
+  avgIncSubpar <- mean(subpar$annual_inc, na.rm=TRUE, trim=.2)
+  print(paste("Income difference: ", as.character((1 - (avgIncSubpar/avgIncPar))*100), "%", sep=""))
+  bwplot(par$loan_status ~ par$annual_inc, xlim=c(0, 150000))
+  bwplot(subpar$loan_status ~ subpar$annual_inc, xlim=c(0, 150000))
 }
 
 
