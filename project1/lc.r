@@ -77,13 +77,13 @@ homeOwnershipAnalysis <- function(df) {
 
   # percent of good loans and home ownership status
   parTab <- table(par$home_ownership)/nrow(par) * 100
-  print(parTab)
+  print(parTab, digits=3)
   # percent of bad loans and home ownership status
   subparTab <- table(subpar$home_ownership)/nrow(subpar) * 100
-  print(subparTab)
+  print(subparTab, digits=3)
   
-  barplot(parTab)
-  barplot(subparTab)
+  #barplot(parTab)
+  #barplot(subparTab)
 }
 
 annualIncAnalysis <- function(df) {
