@@ -19,6 +19,9 @@ output: pdf_document
   par <- getGoodStanding(lcData)
   subpar <- getDefault(lcData)
   
+  par$annual_inc <- remove_outliers(par$annual_inc)
+  subpar$annual_inc <- remove_outliers(subpar$annual_inc)
+  
   lcData <- rbind(par, subpar)
   lcData$loan_status = factor(lcData$loan_status, levels=c("Fully Paid", "Charged Off"))
   lcData$annual_inc <- remove_outliers(lcData$annual_inc)
@@ -64,38 +67,51 @@ The following data is analyzed in detail.
 ```{r}
   # int_rate, loan_amnt, grade, emp_length, home_ownership, annual_inc, delinq_2yrs, dti
   # Note: only 40 rows have a loan status other than "Fully Paid" or "Charged Off" in this dataset
+```
 
+```{r}
   # par to subpar interest rate summaries
   summary(par$int_rate) 
   summary(subpar$int_rate)
-
+```
+  
+```{r}
   # par to subpar annual income
   summary(par$annual_inc)
   summary(subpar$annual_inc)
-
+```
+  
+```{r}
   # par to subpar dti
   summary(as.numeric(as.character(par$dti)))
   summary(as.numeric(as.character(subpar$dti)))
 ```
+
 Do a data summary looking at mean, sd, etc
 
 ## Data Visualization
 ```{r}
   library(lattice)
   # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! pairs(lcData)
-
   mosaicplot(lcData$loan_status ~ lcData$grade, xlab="Loan Status", ylab="Loan Grade", main="Loan Status vs Grade")
-  
+```  
+
+```{r}
   #grade to interest rate 
   bwplot(lcData$int_rate ~ lcData$grade, ylab="Interest Rate", xlab="Loan Grade", main="Interest vs Grade" )
-  
+```
+
+```{r}  
   # comparing quantitative variables to loan_status
   # annual income
   bwplot(lcData$loan_status ~ lcData$annual_inc, main="Annual Income to Loan Status", xlab="Annual Income", ylab="Loan Status") 
-  
+```
+
+```{r}
   # int_rate
   bwplot(lcData$loan_status ~ lcData$int_rate, xlab="Interest Rate (%)", ylab="Loan Status", main="Interest Rate vs Loan Status")
 ```
+
 Let's make a pairs plot and maybe something else cool looking.
 
 
