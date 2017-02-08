@@ -64,8 +64,18 @@ The following data is analyzed in detail.
 ```{r}
   # int_rate, loan_amnt, grade, emp_length, home_ownership, annual_inc, delinq_2yrs, dti
   # Note: only 40 rows have a loan status other than "Fully Paid" or "Charged Off" in this dataset
-  mean(par$int_rate) 
-  mean(subpar$int_rate)
+
+  # par to subpar interest rate summaries
+  summary(par$int_rate) 
+  summary(subpar$int_rate)
+
+  # par to subpar annual income
+  summary(par$annual_inc)
+  summary(subpar$annual_inc)
+
+  # par to subpar dti
+  summary(as.numeric(as.character(par$dti)))
+  summary(as.numeric(as.character(subpar$dti)))
 ```
 Do a data summary looking at mean, sd, etc
 
