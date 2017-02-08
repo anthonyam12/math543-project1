@@ -20,7 +20,7 @@ Data studied in detail is described in the Data Description section.
 
 
 ## Data Description
-The following data is analysed in detail.
+The following data is analyzed in detail.
 
 1. Loan Amount: The amount of a loan is simply the amount in $USD. The loan amount may have some bearing on how likely a person is to pay back. On one hand, a large loan amount may indicate a long time to pay and more time to default. However, this may not be the case.  
 
