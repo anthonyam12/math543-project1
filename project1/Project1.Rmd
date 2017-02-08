@@ -1,4 +1,9 @@
-  ---
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+---
 title: "Project 1: Loan Data"
 author: "Anthony Morast and Daniel Nix"
 date: "February 3, 2017"
@@ -10,9 +15,7 @@ output: pdf_document
 
   packages <- c("dplyr", "lattice", "plotrix")
   for(package in packages) {
-    if(!require(package)){
-      install.packages(package)
-    }
+    require(package)
   }
   source("lc.r")
   lcData <- getGoodData("LoanStats3a.csv")
@@ -22,6 +25,8 @@ output: pdf_document
   subpar <- getDefault(lcData)
   
   lcData <- rbind(par, subpar)
+  lcData$loan_status = factor(lcData$loan_status, levels=c("Fully Paid", "Charged Off"))
+  lcData$annual_inc <- remove_outliers(lcData$annual_inc)
 ```
 
 ## Overview
@@ -62,9 +67,22 @@ Do a data summary looking at mean, sd, etc
 
 ## Data Visualization
 ```{r}
-  pairs(lcData)
+  library(lattice)
+  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! pairs(lcData)
+
+  mosaicplot(lcData$loan_status ~ lcData$grade)
+  #grade to interest rate 
+  plot(lcData$int_rate ~ lcData$grade)
+  
+  # comparing quantitative variables to loan_status
+  # annual income
+  bwplot(lcData$loan_status ~ lcData$annual_inc) 
+  
+  # int_rate
+  bwplot(lcData$loan_status ~ lcData$int_rate)
 ```
 Let's make a pairs plot and maybe something else cool looking.
+
 
 ## Conclusion
 Loans are great! Get one today! It's like FREEEEE MONEYYYYY!!!!
