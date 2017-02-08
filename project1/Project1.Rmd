@@ -53,7 +53,6 @@ The following data is analyzed in detail.
 
 + Loan Status (Qualitative): Status is a measure of how loan payment stands. These range from Fully Paid, meaning the entire balance has been paid back, to Charged Off for which "there is no longer a reasonable expectation of further payments". 
 
-+ Employment Length (Quantitative): The length of time each lendee has held their most recent job. Reliability to work may be an indicator of reliability to pay back a loan.
 
 + Home Ownership (Qualitative): Describes the current status of home ownership for each lendee. The category includes Own, Mortgage, and Rent. 
 
@@ -63,31 +62,45 @@ The following data is analyzed in detail.
 
 + Debt to income ratio (Quantitative): Debt to Income ratio (DTI) is a measure of how much a person owes versus annual income. For example, if a person owes $2,000 and has an annual income of $20,000 has a DTI of 10%.
 
-## Summary
+## Data Summary
 ```{r}
   # int_rate, loan_amnt, grade, emp_length, home_ownership, annual_inc, delinq_2yrs, dti
   # Note: only 40 rows have a loan status other than "Fully Paid" or "Charged Off" in this dataset
 ```
 
+Summaries of quantitative measures are provided in this section. Statistical summaries inclulde the mean and median along with quartiles, maximum, and minimum. For each statistic, separate summaries are provided for Fully Paid and Charged Off loans.
+
+### Interest Rates
+Interest rates may be one measure of how likely a loan is to be paid off. The data collected by Lending Club shows that the median interest rate for loans paid off is approximately the same as the first quartile as those that were not. The data also shows that the median rate for loans not paid off is only slightly lower than the third quartile for those that were fully paid.
 ```{r}
   # par to subpar interest rate summaries
   summary(par$int_rate) 
   summary(subpar$int_rate)
 ```
   
+### Annual Income
+
+Annual income could be another factor in the likelihood a loan is paid back. The median income for those who paid back loans is greater than the income of those who did not. A few outlier incomes greater than $1,000,000 were not included in this summary.
 ```{r}
   # par to subpar annual income
   summary(par$annual_inc)
   summary(subpar$annual_inc)
 ```
-  
+
+### Debt to Income Ratio
+
+Debt to income ratio seems to have little impact on the liklihood a loan is paid back. Each quartile for loans not repaid has approximately 1% greater DTI than corresponding quartiles in loans which were paid back. There was not a shift as significant as with interest rates, where the median of one group matched either the first or third quartile of the other. 
 ```{r}
   # par to subpar dti
   summary(as.numeric(as.character(par$dti)))
   summary(as.numeric(as.character(subpar$dti)))
 ```
 
-Do a data summary looking at mean, sd, etc
+### Home Ownership
+Home ownership may be another metric to predict if a loan will be repaid. If individuals have paid off a home loan or make payments on a mortgage it seems likely they would pay off other loans as well. Based on the following summary this does not appear to be the case. There are only slight differences between the proportions rentals, mortgages, and owned homes between loans fully paid and those which were not.
+```{r}
+  homeOwnershipAnalysis(lcData)
+```
 
 ## Data Visualization
 ```{r}
