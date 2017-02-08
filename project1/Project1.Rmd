@@ -28,7 +28,6 @@ output: pdf_document
 ```
 
 ## Overview
-
 The goal of this project is to summarize loan data and search for trends among borrowers. 
 A data set publicly available, provided by the Lending Club.
 It provides data about loans provided by the peer-to-peer lending company from 2007 to 2011.
@@ -38,7 +37,8 @@ Data studied in detail is described in the Data Description section.
 The dataset is observational data collected for each loan fulfilled using Lending Club. 
 The sample population is limited to people using Lending Club and will likely not be representative of the entire population.
 This means that conclusions drawn from this dataset should only be trusted when making decisions within Lending Club itself.
-Randomization is not applied because the data is a census of the Lending Club loan population.
+Randomization is not applied because the data is a census of the Lending Club loan population. The data we've used, and data 
+for other time periods, [can be found on Lending Club](https://www.lendingclub.com/info/download-data.action).
 
 
 
@@ -63,15 +63,11 @@ The following data is analyzed in detail.
 + Debt to income ratio (Quantitative): Debt to Income ratio (DTI) is a measure of how much a person owes versus annual income. For example, if a person owes $2,000 and has an annual income of $20,000 has a DTI of 10%.
 
 ## Data Summary
-```{r}
-  # int_rate, loan_amnt, grade, emp_length, home_ownership, annual_inc, delinq_2yrs, dti
-  # Note: only 40 rows have a loan status other than "Fully Paid" or "Charged Off" in this dataset
-```
-
 Summaries of quantitative measures are provided in this section. Statistical summaries inclulde the mean and median along with quartiles, maximum, and minimum. For each statistic, separate summaries are provided for Fully Paid and Charged Off loans.
 
 ### Interest Rates
 Interest rates may be one measure of how likely a loan is to be paid off. The data collected by Lending Club shows that the median interest rate for loans paid off is approximately the same as the first quartile as those that were not. The data also shows that the median rate for loans not paid off is only slightly lower than the third quartile for those that were fully paid.
+
 ```{r}
   # par to subpar interest rate summaries
   summary(par$int_rate) 
@@ -103,16 +99,37 @@ Home ownership may be another metric to predict if a loan will be repaid. If ind
 ```
 
 ## Data Visualization
+
+### Data Overview
+The following pairs plots gives a good overview of each feature of the dataset. 
 ```{r}
   library(lattice)
-  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! pairs(lcData)
+  pairs(lcData)
+```
+From this scatterplot matrix we see much of the data needs to be massaged to derive valuable information. For example, the multiple black boxes for `emp_length` indicates this data needs to be changed prior to any analysis concerning the feature. 
+
+### Brief Analysis of Lending Club Grades
+Based on [historic Lending Club data](https://www.lendingclub.com/info/statistics.action), the `grades` of the loans, which are determined by Lending Club, should be good indicators of their quality. The plot below determines this is mostly true. The mosaic plot shows, in general, an 'A' grade loan is much less likely to default whereas loans given the grade 'G' appear to default 3-4 times as often. 
+```{r}
   mosaicplot(lcData$loan_status ~ lcData$grade, xlab="Loan Status", ylab="Loan Grade", main="Loan Status vs Grade")
 ```  
 
+### Interest Rates Compared to Loan Grades
+Information pertaining to the likelihood of default for low grade loans begs the question "Who would purchase these subprime investments?" Supposedly, the most attractive feature of low grade loans is their higher interest rate. To verify this we plotted the interest rates of the loans against their grades.    
 ```{r}
   #grade to interest rate 
-  bwplot(lcData$int_rate ~ lcData$grade, ylab="Interest Rate", xlab="Loan Grade", main="Interest vs Grade" )
+  bwplot(lcData$int_rate ~ lcData$grade, ylab="Interest Rate", xlab="Loan Grade", main="Interest Rate vs Grade" )
 ```
+
+We can see, for the most part, the interest rates increase significantly for lower grade loans. As shown below, the interest rate is largely dependent on the assigned grade of each loan.   
+```{r}
+  paste("Interest Rate to Grade Correlation: ", cor(lcData$int_rate, as.numeric(lcData$grade)), sep="")
+```
+
+### Key Quantitative Variables
+Some features that stood out in the data set were `Annual Income` and `Interest Rate`. Our conjecture was lower annual incomes and/or higher interest rates would lead to more defaults. 
+
+Plotting `Annual Income` to `Loan Status` indicates a persons annual income might play a small role in whether or not a borrower would repay a loan through Lending Club. The data shows the mean and median are relatively close to one another, thus there is no drastic difference in the income levels of borrowers that default and those that pay their loans in full. 
 
 ```{r}  
   # comparing quantitative variables to loan_status
@@ -120,12 +137,12 @@ Home ownership may be another metric to predict if a loan will be repaid. If ind
   bwplot(lcData$loan_status ~ lcData$annual_inc, main="Annual Income to Loan Status", xlab="Annual Income", ylab="Loan Status") 
 ```
 
+Comparing `Interest Rate` and `Loan Status` produces similar results. Even though our conjecture is somewhat correct, that is "Charged Off" loans typically have higher interst rates than "Fully Paid" loans, the interest rates are not significantly higher, as shown in the chart below. Looking at the summary data for interest rates between the two types of loans, prime and subprime, shows about a 15.5% difference in the average interest rate. 
+
 ```{r}
   # int_rate
   bwplot(lcData$loan_status ~ lcData$int_rate, xlab="Interest Rate (%)", ylab="Loan Status", main="Interest Rate vs Loan Status")
 ```
-
-Let's make a pairs plot and maybe something else cool looking.
 
 ## Uses for this data
 Lending Club, along with venture capital companies have used this dataset to attempt prediction of good and bad loans. 
