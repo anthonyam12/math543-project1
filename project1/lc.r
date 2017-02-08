@@ -10,16 +10,27 @@ getGoodData <- function(filename) {
 }
 
 getGoodStanding <- function(df) {
-  return(filter(df, !(loan_status %in% c("Charged Off", "Default"))))
+  # newer data sets would use `filter(df, !(loan_status %in% c("Charged Off", "Default")))`
+  return(filter(df, loan_status == "Fully Paid"))
 }
 
 getDefault <- function(df) {
-  return(filter(df, loan_status %in% c("Charged Off", "Default")))
+  # newer data sets would us `filter(df, loan_status %in% c("Charged Off", "Default"))`
+  return(filter(df, loan_status == "Charged Off"))
 }
 
 intRateToNumeric <- function(df) {
   df$int_rate <- sapply(df$int_rate, function(x) as.numeric(substr(x, 1, nchar(as.character(x))-1)))
   return(df)
+}
+
+remove_outliers <- function(x, na.rm = TRUE, ...) {
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- NA
+  y[x > (qnt[2] + H)] <- NA
+  y
 }
 
 # not a very useful feature
