@@ -13,30 +13,37 @@ knitr::opts_chunk$set(echo = TRUE)
 
 The goal of this project is to summarize loan data and search for trends among borrowers. 
 A data set publicly available, provided by the Lending Club.
-It provides data about loans provided by the peer-to-peer lending company from 20XX to 2016.
+It provides data about loans provided by the peer-to-peer lending company from 2007 to 2011.
 It includes information about the the size of loans, lender ratings, home ownership, and many others. 
 Data studied in detail is described in the Data Description section.
+
+The dataset is observational data collected for each loan fulfilled using Lending Club. 
+The sample population is limited to people using Lending Club and will likely not be representative of the entire population.
+This means that conclusions drawn from this dataset should only be trusted when making decisions within Lending Club itself.
+Randomization is not applied because the data is a census of the Lending Club loan population.
 
 
 
 ## Data Description
 The following data is analyzed in detail.
 
-1. Loan Amount: The amount of a loan is simply the amount in $USD. The loan amount may have some bearing on how likely a person is to pay back. On one hand, a large loan amount may indicate a long time to pay and more time to default. However, this may not be the case.  
++ Loan Amount (Quantitative): The amount of a loan is simply the amount in $USD. The loan amount may have some bearing on how likely a person is to pay back. On one hand, a large loan amount may indicate a long time to pay and more time to default. However, this may not be the case.  
 
-2. Grade: Loan grade is a measure by Lending Club used to assign interest rates to lendees. Grades range from A1 with 5.32% interest to G5 with 30.99% interest and depend on the loan application and credit report.
++ Grade (Qualitative): Loan grade is a measure by Lending Club used to assign interest rates to lendees. Grades range from A1 with 5.32% interest to G5 with 30.99% interest and depend on the loan application and credit report.
 
-3. Loan Status: Status is a measure of how loan payment stands. These range from Fully Paid, meaning the entire balance has been paid back, to Charged Off for which "there is no longer a reasonable expectation of further payments". 
++ Interest Rate (Quantitative): The APR interest rate for each loan. This may correlate with the loan grade.
 
-4. Employment Length: The length of time each lendee has held their most recent job. Reliability to work may be an indicator of reliability to pay back a loan.
++ Loan Status (Qualitative): Status is a measure of how loan payment stands. These range from Fully Paid, meaning the entire balance has been paid back, to Charged Off for which "there is no longer a reasonable expectation of further payments". 
 
-5. Home Ownership: Describes the current status of home ownership for each lendee. The category includes Own, Mortgage, and Rent. 
++ Employment Length (Quantitative): The length of time each lendee has held their most recent job. Reliability to work may be an indicator of reliability to pay back a loan.
 
-6. Annual Income: The amount in $USD each lendee makes as an individual. This category does not inculde any income made by a spouse. Joint income is included as a category but was not analyzed in this report.
++ Home Ownership (Qualitative): Describes the current status of home ownership for each lendee. The category includes Own, Mortgage, and Rent. 
 
-7. Delinquent 2 Years: This is a measure of how long a loan has been left delinquent. Varying degrees of delinquincy are included as binary categories, but two years delinquent is used in this report to be equivalent to default.
++ Annual Income (Quantitative): The amount in $USD each lendee makes as an individual. This category does not inculde any income made by a spouse. Joint income is included as a category but was not analyzed in this report.
 
-8. Debt to income ratio: Debt to Income ratio (DTI) is a measure of how much a person owes versus annual income. For example, if a person owes $2,000 and has an annual income of $20,000 has a DTI of 10%.
++ Delinquent 2 Years (Qualitative): This is a measure of how long a loan has been left delinquent. Varying degrees of delinquincy are included as binary categories, but two years delinquent is used in this report to be equivalent to default.
+
++ Debt to income ratio (Quantitative): Debt to Income ratio (DTI) is a measure of how much a person owes versus annual income. For example, if a person owes $2,000 and has an annual income of $20,000 has a DTI of 10%.
 
 ## Summary
 Do a data summary looking at mean, sd, etc
