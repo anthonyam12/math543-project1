@@ -102,10 +102,12 @@ Home ownership may be another metric to predict if a loan will be repaid. If ind
 
 ### Data Overview
 The following pairs plots gives a good overview of each feature of the dataset. 
+
 ```{r}
   library(lattice)
   pairs(lcData)
 ```
+
 From this scatterplot matrix we see much of the data needs to be massaged to derive valuable information. For example, the multiple black boxes for `emp_length` indicates this data needs to be changed prior to any analysis concerning the feature. 
 
 ### Brief Analysis of Lending Club Grades
